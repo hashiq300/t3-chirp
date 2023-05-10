@@ -6,11 +6,12 @@ import { api } from "~/utils/api";
 
 
 const Home: NextPage = () => {
-  const posts = api.post.getAll.useQuery();
+  // const posts = api.post.getAll.useQuery();
+  const hello = api.post.hello.useQuery({
+    text: "Hi bitch"
+  })
   const user = useUser();
   const { signOut } = useClerk()
-  console.log(user);
-  console.log(posts.data)
   return (
     <>
       <Head>
@@ -24,14 +25,18 @@ const Home: NextPage = () => {
             <h1>{user.user.lastName}</h1>
             <button onClick={() => void signOut()}>Signout</button>
           </>
-        ) : (<SignInButton />)}
+        ) : (
+          <>
+            <h1>{hello.data?.greeting}</h1>
+            <SignInButton mode="modal" redirectUrl="/" />
+          </>)}
         <br />
-        {posts.data?.map(post => (
+        {/* {posts.data?.map(post => (
 
           <>
             <p >{JSON.stringify(post)}</p>
           </>
-        ))}
+        ))} */}
       </main>
     </>
   );
