@@ -2,13 +2,15 @@ import { SignInButton, useClerk, useUser } from "@clerk/nextjs";
 
 import { type NextPage } from "next";
 import Head from "next/head";
+import { api } from "~/utils/api";
 
 
 const Home: NextPage = () => {
-
+  const posts = api.post.getAll.useQuery();
   const user = useUser();
   const { signOut } = useClerk()
   console.log(user);
+  console.log(posts.data)
   return (
     <>
       <Head>
@@ -23,6 +25,13 @@ const Home: NextPage = () => {
             <button onClick={() => void signOut()}>Signout</button>
           </>
         ) : (<SignInButton />)}
+        <br />
+        {posts.data?.map(post => (
+
+          <>
+            <p >{JSON.stringify(post)}</p>
+          </>
+        ))}
       </main>
     </>
   );
