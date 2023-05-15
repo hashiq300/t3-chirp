@@ -25,10 +25,14 @@ export const postRouter = createTRPCRouter({
 
 
 function filterUserDetails(user: User | null) {
-  if (!user) return null;
+  let username = "Anonymous";
+  if (user?.firstName && user.lastName) {
+    username = `${user.firstName} ${user.lastName}`
+  }
   return {
-    username: user.username,
-    profileImageUrl: user.profileImageUrl,
-    id: user.id
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    username,
+    profileImageUrl: user?.profileImageUrl ?? "/userimage.jpg",
+    id: user?.id ?? crypto.randomUUID()
   }
 }

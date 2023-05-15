@@ -14,7 +14,7 @@ const UserWizard = () => {
                 src={user.profileImageUrl}
                 alt={user.username ?? ""}
             />
-            <input type="text" placeholder="Type some imojies" className="bg-transparent border-slate-400 border-2 p-2 w-[60%] outline-none" />
+            <input type="text" placeholder="Type some emojies" className="bg-transparent border-slate-400 border-2 p-2 w-[60%] outline-none" />
         </  >
     )
 }
